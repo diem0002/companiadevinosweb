@@ -13,18 +13,18 @@
   --popover: 0 0% 100%;
   --popover-foreground: 345 80% 30%;
 
-  --primary: 345 80% 30%;
-  /* Deep Wine */
+  --primary: 345 90% 25%;
+  /* Much Deeper Red #7A0B22 approx */
   --primary-foreground: 35 30% 98%;
 
   --secondary: 35 30% 96%;
-  --secondary-foreground: 345 80% 30%;
+  --secondary-foreground: 345 90% 25%;
 
   --muted: 35 30% 96%;
   --muted-foreground: 345 40% 45%;
 
-  --accent: 35 80% 50%;
-  /* Gold/Amber */
+  --accent: 38 92% 50%;
+  /* Vibrant Gold/Orange #F2A900 approx */
   --accent-foreground: 35 30% 98%;
 
   --destructive: 0 84.2% 60.2%;
@@ -32,7 +32,7 @@
 
   --border: 345 20% 90%;
   --input: 345 20% 90%;
-  --ring: 345 80% 30%;
+  --ring: 345 90% 25%;
 
   --radius: 2rem;
 }
@@ -47,8 +47,8 @@
   --popover: 345 50% 8%;
   --popover-foreground: 35 30% 98%;
 
-  --primary: 35 80% 50%;
-  --primary-foreground: 345 80% 30%;
+  --primary: 38 92% 50%;
+  --primary-foreground: 345 90% 25%;
 
   --secondary: 345 30% 15%;
   --secondary-foreground: 35 30% 98%;
@@ -56,7 +56,7 @@
   --muted: 345 30% 15%;
   --muted-foreground: 345 40% 65%;
 
-  --accent: 345 80% 30%;
+  --accent: 345 90% 25%;
   --accent-foreground: 35 30% 98%;
 
   --destructive: 0 62.8% 30.6%;
@@ -64,22 +64,28 @@
 
   --border: 345 30% 15%;
   --input: 345 30% 15%;
-  --ring: 35 80% 50%;
+  --ring: 38 92% 50%;
 }
 
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 10rem;
+    /* Increased to ensure visibility */
+  }
+
   * {
     @apply border-border;
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
   }
 }
 
 .glass {
-  @apply bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl;
+  @apply bg-white/70 backdrop-blur-xl border border-white/20 shadow-2xl;
 }
 
 .text-balance {

@@ -19,7 +19,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="es" className="scroll-smooth">
+        <html lang="es">
             <body className={inter.className}>
                 <LanguageProvider>
                     <main className="relative min-h-screen w-full overflow-x-hidden bg-background">
