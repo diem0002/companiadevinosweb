@@ -5,6 +5,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { Facebook, Instagram, Mail, MapPin, Phone } from "lucide-react";
 import Link from "next/link";
 import { Button } from "../ui/button";
+import { ObfuscatedContact } from "../ui/obfuscated-contact";
 
 export function Footer() {
     const { t } = useLanguage();
@@ -73,13 +74,13 @@ export function Footer() {
                                 <div className="h-8 w-8 rounded-lg bg-white/5 flex items-center justify-center shrink-0">
                                     <Phone className="h-4 w-4 text-accent" />
                                 </div>
-                                <span>+54 9 345 412-8571</span>
+                                <ObfuscatedContact value="+54 9 345 412-8571" type="phone" />
                             </li>
                             <li className="flex items-center gap-4">
                                 <div className="h-8 w-8 rounded-lg bg-white/5 flex items-center justify-center shrink-0">
                                     <Mail className="h-4 w-4 text-accent" />
                                 </div>
-                                <span className="break-all">companiadevinos_cdia@yahoo.com.ar</span>
+                                <ObfuscatedContact value="companiadevinos_cdia@yahoo.com.ar" type="email" className="break-all" />
                             </li>
                         </ul>
                     </div>

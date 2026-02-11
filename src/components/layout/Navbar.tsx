@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Button } from "../ui/button";
 import { FlagARG, FlagBRA } from "../icons/flags";
+import { ObfuscatedContact } from "../ui/obfuscated-contact";
 
 export function Navbar() {
     const { t, language, setLanguage } = useLanguage();
@@ -106,14 +107,12 @@ export function Navbar() {
                     </div>
 
                     {/* WhatsApp Button */}
-                    <a
-                        href="https://wa.me/5493454128571"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center h-9 rounded-full bg-primary text-[0.7rem] font-black tracking-widest px-6 text-white hover:bg-primary/90 shadow-lg shadow-primary/20 animate-pulse-slow transition-colors"
-                    >
-                        WHATSAPP
-                    </a>
+                    <ObfuscatedContact
+                        value="5493454128571"
+                        type="phone"
+                        text="WHATSAPP"
+                        className="inline-flex items-center justify-center h-9 rounded-full bg-primary text-[0.7rem] font-black tracking-widest px-6 text-white hover:bg-primary/90 shadow-lg shadow-primary/20 animate-pulse-slow transition-colors hover:text-white"
+                    />
                 </div>
 
                 {/* Mobile Menu Toggle */}
@@ -157,14 +156,12 @@ export function Navbar() {
                         {t("nav.location")}
                     </Link>
 
-                    <a
-                        href="https://wa.me/5493454128571"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center w-full h-10 rounded-full bg-primary font-black tracking-widest text-white hover:bg-primary/90 transition-colors"
-                    >
-                        WHATSAPP
-                    </a>
+                    <ObfuscatedContact
+                        value="5493454128571"
+                        type="phone"
+                        text="WHATSAPP"
+                        className="inline-flex items-center justify-center w-full h-10 rounded-full bg-primary font-black tracking-widest text-white hover:bg-primary/90 transition-colors hover:text-white"
+                    />
                 </div>
             )}
         </nav>

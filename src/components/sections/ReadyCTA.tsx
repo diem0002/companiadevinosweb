@@ -4,6 +4,7 @@
 import { useLanguage } from "@/context/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { MessageCircle } from "lucide-react";
+import { ObfuscatedContact } from "../ui/obfuscated-contact";
 
 export function ReadyCTA() {
     const { t } = useLanguage();
@@ -22,14 +23,12 @@ export function ReadyCTA() {
                     {t("ready.desc")}
                 </p>
 
-                <a
-                    href="https://wa.me/5493454128571"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center bg-accent text-white hover:bg-accent/90 rounded-full font-black tracking-widest px-10 py-4 shadow-2xl shadow-black/20 text-sm transition-transform hover:scale-105"
-                >
-                    {t("ready.cta")}
-                </a>
+                <ObfuscatedContact
+                    value="5493454128571"
+                    type="phone"
+                    text={t("ready.cta")}
+                    className="inline-flex items-center justify-center bg-accent text-white hover:bg-accent/90 rounded-full font-black tracking-widest px-10 py-4 shadow-2xl shadow-black/20 text-sm transition-transform hover:scale-105 hover:text-white"
+                />
             </div>
         </section>
     );
