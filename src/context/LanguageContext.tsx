@@ -58,7 +58,7 @@ export const translations = {
 
         // Location
         "location.overline": "DONDE ESTAMOS",
-        "location.title": "ENCONTRANOS EN EL CENTRO",
+        "location.title": "TU PUNTO DE ENCUENTRO",
         "location.address.title": "DONDE ESTAMOS",
         "location.address": "San Luis 1220, Concordia, Entre Ríos",
         "location.hours.title": "HORARIOS",
@@ -124,7 +124,7 @@ export const translations = {
 
         // Location
         "location.overline": "ONDE ESTAMOS",
-        "location.title": "ENCONTRE-NOS NO CENTRO",
+        "location.title": "SEU PONTO DE ENCONTRO",
         "location.address.title": "ONDE ESTAMOS",
         "location.address": "San Luis 1220, Concordia, Entre Ríos",
         "location.hours.title": "HORÁRIOS",
