@@ -4,7 +4,7 @@
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/context/LanguageContext";
 import Image from "next/image";
-import { ChevronRight, MessageSquareText } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import placeholderImages from "@/lib/placeholder-images.json";
 
 export function Hero() {
@@ -35,14 +35,15 @@ export function Hero() {
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                        <Button size="xl" className="rounded-full bg-primary hover:bg-primary/90 text-white font-bold px-8 shadow-xl shadow-primary/20 transition-all hover:scale-105">
-                            <MessageSquareText className="mr-2 h-4 w-4" />
-                            {t("hero.cta.stock")}
-                        </Button>
-                        <Button variant="outline" size="xl" className="rounded-full border-none bg-white hover:bg-gray-50 text-foreground hover:text-primary font-bold px-8 shadow-lg transition-all hover:scale-105 group">
+                        <a
+                            href="https://diem0002.github.io/Carta-online-compania-de-vinos/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center h-14 rounded-full bg-primary hover:bg-primary/90 text-white font-bold px-8 shadow-xl shadow-primary/20 transition-all hover:scale-105 group"
+                        >
                             {t("hero.cta.catalog")}
-                            <ChevronRight className="ml-1 h-4 w-4 text-accent group-hover:translate-x-1 transition-transform" />
-                        </Button>
+                            <ChevronRight className="ml-2 h-4 w-4 text-accent group-hover:translate-x-1 transition-transform" />
+                        </a>
                     </div>
                 </div>
 
