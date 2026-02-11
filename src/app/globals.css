@@ -1,0 +1,87 @@
+@import "tailwindcss";
+@config "../../tailwind.config.ts";
+
+:root {
+  --background: 35 30% 98%;
+  /* Cream #FDFBF9 */
+  --foreground: 345 80% 30%;
+  /* Deep Wine Text */
+
+  --card: 0 0% 100%;
+  --card-foreground: 345 80% 30%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 345 80% 30%;
+
+  --primary: 345 80% 30%;
+  /* Deep Wine */
+  --primary-foreground: 35 30% 98%;
+
+  --secondary: 35 30% 96%;
+  --secondary-foreground: 345 80% 30%;
+
+  --muted: 35 30% 96%;
+  --muted-foreground: 345 40% 45%;
+
+  --accent: 35 80% 50%;
+  /* Gold/Amber */
+  --accent-foreground: 35 30% 98%;
+
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+
+  --border: 345 20% 90%;
+  --input: 345 20% 90%;
+  --ring: 345 80% 30%;
+
+  --radius: 2rem;
+}
+
+.dark {
+  --background: 345 50% 5%;
+  --foreground: 35 30% 98%;
+
+  --card: 345 50% 8%;
+  --card-foreground: 35 30% 98%;
+
+  --popover: 345 50% 8%;
+  --popover-foreground: 35 30% 98%;
+
+  --primary: 35 80% 50%;
+  --primary-foreground: 345 80% 30%;
+
+  --secondary: 345 30% 15%;
+  --secondary-foreground: 35 30% 98%;
+
+  --muted: 345 30% 15%;
+  --muted-foreground: 345 40% 65%;
+
+  --accent: 345 80% 30%;
+  --accent-foreground: 35 30% 98%;
+
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+
+  --border: 345 30% 15%;
+  --input: 345 30% 15%;
+  --ring: 35 80% 50%;
+}
+
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.glass {
+  @apply bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
