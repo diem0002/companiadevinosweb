@@ -1,71 +1,158 @@
-
 "use client";
 
 import { useLanguage } from "@/context/LanguageContext";
 import Image from "next/image";
 import placeholderImages from "@/lib/placeholder-images.json";
-import { Star, Mic, Heart } from "lucide-react";
+import { Grape, Flame, Gift, MessageCircle } from "lucide-react";
+import { ObfuscatedContact } from "../ui/obfuscated-contact";
 
 export function Story() {
     const { t } = useLanguage();
 
+    const pillars = [
+        {
+            icon: <Grape aria-hidden="true" className="h-5 w-5 text-primary" />,
+            title: t("story.card1.title"),
+            desc: t("story.card1.desc"),
+            featured: false,
+        },
+        {
+            icon: <Flame aria-hidden="true" className="h-5 w-5 text-accent" />,
+            title: t("story.card2.title"),
+            desc: t("story.card2.desc"),
+            featured: true,
+        },
+        {
+            icon: <Gift aria-hidden="true" className="h-5 w-5 text-primary" />,
+            title: t("story.card3.title"),
+            desc: t("story.card3.desc"),
+            featured: false,
+        },
+        {
+            icon: <MessageCircle aria-hidden="true" className="h-5 w-5 text-accent" />,
+            title: t("story.card4.title"),
+            desc: t("story.card4.desc"),
+            featured: true,
+        },
+    ];
+
     return (
-        <section id="story" className="relative py-24 scroll-mt-32 overflow-hidden">
+        <section id="story" className="relative py-24 scroll-mt-28 overflow-hidden bg-secondary/45">
+            {/* Subtle Burgundy & Gold Ambient Glow */}
+            <div
+                aria-hidden="true"
+                className="pointer-events-none absolute -left-24 top-1/3 h-[500px] w-[500px] rounded-full bg-primary/8 blur-[110px]"
+            />
 
-            {/* Ambient Glow */}
-            <div className="absolute left-0 top-1/2 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-accent/5 blur-[100px]" />
-
-            <div className="container relative z-10 mx-auto px-6">
-                <div className="grid lg:grid-cols-2 gap-16 items-center">
-
-                    {/* Left: Image Composition */}
-                    <div className="relative">
-                        <div className="relative aspect-square w-full rounded-[3rem] overflow-hidden border-[8px] border-white shadow-2xl">
+            <div className="container relative z-10 mx-auto px-6 fluid-container">
+                <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+                    {/* Left: Vertical 9:16 Dual Photo Composition */}
+                    <div className="lg:col-span-5 grid grid-cols-2 gap-4 sm:gap-6 items-center">
+                        <div className="relative aspect-[9/15] w-full rounded-[2.25rem] overflow-hidden border-4 border-card editorial-photo-card -rotate-1 hover:rotate-0 transition-transform duration-500">
                             <Image
-                                src={placeholderImages.story}
-                                alt={t("story.title")}
+                                src={placeholderImages.granReserva}
+                                alt="Gran Reserva Malbec en las estanterías de Compañía de Vinos"
                                 fill
+                                sizes="(min-width: 1024px) 22vw, 48vw"
+                                loading="lazy"
                                 className="object-cover"
-                                unoptimized
+                            />
+                            <div
+                                aria-hidden="true"
+                                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent"
                             />
                         </div>
-                        {/* Floating Badge */}
-                        <div className="absolute -top-6 -right-6 h-24 w-24 rounded-full bg-primary flex items-center justify-center shadow-xl border-4 border-white animate-bounce-slow">
-                            <Star className="h-10 w-10 text-accent fill-accent" />
+
+                        <div className="relative aspect-[9/15] w-full rounded-[2.25rem] overflow-hidden border-4 border-card editorial-photo-card translate-y-6 rotate-1 hover:rotate-0 transition-transform duration-500">
+                            <Image
+                                src={placeholderImages.regaleria}
+                                alt="Set de regalería con vino Malbec, copas de cristal y aireador"
+                                fill
+                                sizes="(min-width: 1024px) 22vw, 48vw"
+                                loading="lazy"
+                                className="object-cover"
+                            />
+                            <div
+                                aria-hidden="true"
+                                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent"
+                            />
                         </div>
                     </div>
 
-                    {/* Right: Content */}
-                    <div className="space-y-8">
-                        <div className="space-y-2">
-                            <span className="text-xs font-black tracking-[0.2em] text-primary uppercase flex items-center gap-2">
-                                <span className="h-[2px] w-8 bg-accent" />
+                    {/* Right: Content & Updated Product Cards */}
+                    <div className="lg:col-span-7 space-y-8">
+                        <div className="space-y-3">
+                            <span className="text-xs font-black tracking-[0.22em] text-primary uppercase flex items-center gap-3">
+                                <span aria-hidden="true" className="h-[2px] w-8 bg-accent" />
                                 {t("story.identity")}
                             </span>
-                            <h2 className="text-5xl md:text-6xl font-black text-primary leading-[0.9]">
-                                {t("story.title").split(" ")[0]} <br />
-                                <span className="text-accent">{t("story.title").split(" ").slice(1).join(" ")}</span>
+                            <h2 className="fluid-section-title font-black text-primary leading-[0.94] uppercase">
+                                {t("story.title.line1")}{" "}
+                                <span className="text-accent block">{t("story.title.accent")}</span>
                             </h2>
                         </div>
 
-                        <p className="text-lg text-muted-foreground leading-relaxed">
+                        <p className="text-base md:text-lg text-foreground/85 font-medium leading-relaxed">
                             {t("story.p1")}
                         </p>
-                        <p className="text-sm text-muted-foreground/80 leading-relaxed border-l-4 border-accent pl-4">
+                        <p className="text-sm md:text-base text-muted-foreground leading-relaxed border-l-4 border-accent pl-5 py-1">
                             {t("story.p2")}
                         </p>
 
-                        <div className="grid grid-cols-2 gap-4 pt-4">
-                            <div className="bg-white rounded-3xl p-6 shadow-sm border border-black/5 hover:border-accent/30 transition-colors">
-                                <Heart className="h-6 w-6 text-primary mb-3" />
-                                <h4 className="font-black text-sm uppercase mb-1">{t("story.badge.curated")}</h4>
-                                <p className="text-xs text-muted-foreground">{t("story.badge.curated.desc")}</p>
-                            </div>
-                            <div className="bg-accent/10 rounded-3xl p-6 border border-accent/20">
-                                <Mic className="h-6 w-6 text-primary mb-3" />
-                                <h4 className="font-black text-sm uppercase mb-1">{t("story.badge.excellence")}</h4>
-                                <p className="text-xs text-muted-foreground">{t("story.badge.excellence.desc")}</p>
-                            </div>
+                        {/* 4 Cards replacing the old Curaduría card */}
+                        <div className="grid sm:grid-cols-2 gap-4 pt-2">
+                            {pillars.map((pillar, i) => (
+                                <div
+                                    key={i}
+                                    className={
+                                        pillar.featured
+                                            ? "scroll-reveal-card bg-primary text-white rounded-3xl p-6 shadow-lg border border-primary/20"
+                                            : "scroll-reveal-card bg-card text-foreground rounded-3xl p-6 shadow-sm border border-primary/10 hover:border-accent/40 transition-colors"
+                                    }
+                                >
+                                    <div className="flex items-center gap-3 mb-2.5">
+                                        <div
+                                            className={
+                                                pillar.featured
+                                                    ? "h-9 w-9 rounded-xl bg-white/15 flex items-center justify-center shrink-0"
+                                                    : "h-9 w-9 rounded-xl bg-secondary flex items-center justify-center shrink-0"
+                                            }
+                                        >
+                                            {pillar.icon}
+                                        </div>
+                                        <h3
+                                            className={
+                                                pillar.featured
+                                                    ? "font-black text-xs uppercase tracking-wider text-accent"
+                                                    : "font-black text-xs uppercase tracking-wider text-primary"
+                                            }
+                                        >
+                                            {pillar.title}
+                                        </h3>
+                                    </div>
+                                    <p
+                                        className={
+                                            pillar.featured
+                                                ? "text-xs text-white/85 leading-relaxed"
+                                                : "text-xs text-muted-foreground leading-relaxed"
+                                        }
+                                    >
+                                        {pillar.desc}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="pt-2">
+                            <ObfuscatedContact
+                                value="5493454128571"
+                                type="phone"
+                                text={t("story.cta")}
+                                message={t("ready.whatsapp.message")}
+                                className="inline-flex items-center justify-center gap-2.5 h-13 rounded-full bg-primary hover:bg-primary/90 text-white hover:text-white font-black tracking-wider text-xs uppercase px-8 shadow-lg shadow-primary/20 transition-transform hover:scale-[1.02]"
+                            >
+                                <MessageCircle aria-hidden="true" className="h-4 w-4 text-accent" />
+                            </ObfuscatedContact>
                         </div>
                     </div>
                 </div>

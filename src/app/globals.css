@@ -2,77 +2,102 @@
 @config "../../tailwind.config.ts";
 
 :root {
-  --background: 35 30% 98%;
-  /* Cream #FDFBF9 */
-  --foreground: 345 80% 30%;
-  /* Deep Wine Text */
+  /* Exact logo background match: #632740 -> HSL 335 43% 27% */
+  --brand-plum-light: hsl(335 43% 27%);
+  --brand-plum-dark: hsl(335 48% 22%);
+  --brand-gold-light: hsl(35 62% 46%);
+  --brand-gold-dark: hsl(38 75% 56%);
 
-  --card: 0 0% 100%;
-  --card-foreground: 345 80% 30%;
+  --background: 36 27% 95%;
+  /* Warm paper cream #F6F3EE matching the Hero animation paper */
+  --foreground: 335 45% 18%;
+  /* Deep Wine Charcoal */
 
-  --popover: 0 0% 100%;
-  --popover-foreground: 345 80% 30%;
+  --card: 36 33% 98%;
+  --card-foreground: 335 45% 18%;
 
-  --primary: 345 90% 25%;
-  /* Much Deeper Red #7A0B22 approx */
-  --primary-foreground: 35 30% 98%;
+  --popover: 36 33% 98%;
+  --popover-foreground: 335 45% 18%;
 
-  --secondary: 35 30% 96%;
-  --secondary-foreground: 345 90% 25%;
+  --primary: 335 43% 27%;
+  /* Exact Logo Burgundy #632740 */
+  --primary-foreground: 36 33% 98%;
 
-  --muted: 35 30% 96%;
-  --muted-foreground: 345 40% 45%;
+  --secondary: 35 24% 90%;
+  /* Hero video paper tone #ECE6DC */
+  --secondary-foreground: 335 43% 27%;
 
-  --accent: 38 92% 50%;
-  /* Vibrant Gold/Orange #F2A900 approx */
-  --accent-foreground: 35 30% 98%;
+  --muted: 35 22% 91%;
+  --muted-foreground: 335 25% 36%;
+
+  --accent: 35 62% 46%;
+  /* Warm Oak / Gold #BF802D */
+  --accent-foreground: 36 33% 98%;
 
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 0 0% 98%;
 
-  --border: 345 20% 90%;
-  --input: 345 20% 90%;
-  --ring: 345 90% 25%;
+  --border: 335 18% 85%;
+  --input: 335 18% 85%;
+  --ring: 335 43% 27%;
 
   --radius: 2rem;
+
+  /* Native browser UI theming (dark-mode guide) */
+  color-scheme: light dark;
+  --scrollbar-track: #ece6dc;
+  --scrollbar-thumb: #632740;
+
+  @media (prefers-color-scheme: dark) {
+    --scrollbar-track: #1f1016;
+    --scrollbar-thumb: #c98a36;
+  }
+
+  @supports (color: light-dark(white, black)) {
+    --scrollbar-track: light-dark(#ece6dc, #1f1016);
+    --scrollbar-thumb: light-dark(#632740, #c98a36);
+  }
+
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  accent-color: hsl(var(--primary));
 }
 
 .dark {
-  --background: 345 50% 5%;
-  --foreground: 35 30% 98%;
+  --background: 335 38% 8%;
+  --foreground: 36 27% 95%;
 
-  --card: 345 50% 8%;
-  --card-foreground: 35 30% 98%;
+  --card: 335 35% 11%;
+  --card-foreground: 36 27% 95%;
 
-  --popover: 345 50% 8%;
-  --popover-foreground: 35 30% 98%;
+  --popover: 335 35% 11%;
+  --popover-foreground: 36 27% 95%;
 
-  --primary: 38 92% 50%;
-  --primary-foreground: 345 90% 25%;
+  --primary: 335 43% 27%;
+  --primary-foreground: 36 33% 98%;
 
-  --secondary: 345 30% 15%;
-  --secondary-foreground: 35 30% 98%;
+  --secondary: 335 28% 15%;
+  --secondary-foreground: 36 27% 95%;
 
-  --muted: 345 30% 15%;
-  --muted-foreground: 345 40% 65%;
+  --muted: 335 28% 15%;
+  --muted-foreground: 35 20% 72%;
 
-  --accent: 345 90% 25%;
-  --accent-foreground: 35 30% 98%;
+  --accent: 38 75% 54%;
+  --accent-foreground: 335 45% 14%;
 
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 0 0% 98%;
 
-  --border: 345 30% 15%;
-  --input: 345 30% 15%;
-  --ring: 38 92% 50%;
+  --border: 335 25% 18%;
+  --input: 335 25% 18%;
+  --ring: 38 75% 54%;
 }
-
 
 @layer base {
   html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 10rem;
-    /* Increased to ensure visibility */
+    scroll-padding-top: 7rem;
+    @media (prefers-reduced-motion: no-preference) {
+      scroll-behavior: smooth;
+    }
   }
 
   * {
@@ -82,12 +107,148 @@
   body {
     @apply bg-background text-foreground antialiased;
   }
+
+  /* Typography guide: balance short headings, pretty wrap body copy */
+  h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance;
+  }
+
+  p, li, blockquote {
+    text-wrap: pretty;
+  }
+}
+
+/* Visually hidden utility (accessibility guide) */
+.visually-hidden:where(:not(:focus-within, :active)) {
+  position: absolute !important;
+  clip-path: inset(50%) !important;
+  overflow: hidden !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+}
+
+/* Focus indicators (accessibility guide) */
+:where(a:any-link, button):focus-visible {
+  outline: 3px solid hsl(var(--accent));
+  outline-offset: 3px;
+}
+
+/* Fluid scaling with container query units and vw fallback (fluid-scaling guide, max <= 2.5x min) */
+.fluid-container {
+  container-type: inline-size;
+}
+
+.fluid-hero-title {
+  font-size: clamp(2.5rem, 6vw, 5.5rem);
+}
+
+.fluid-section-title {
+  font-size: clamp(2rem, 4.5vw, 4.25rem);
+}
+
+@supports (font-size: 1cqi) {
+  .fluid-hero-title {
+    font-size: clamp(2.5rem, 6.5cqi, 5.5rem);
+  }
+  .fluid-section-title {
+    font-size: clamp(2rem, 4.8cqi, 4.25rem);
+  }
 }
 
 .glass {
-  @apply bg-white/70 backdrop-blur-xl border border-white/20 shadow-2xl;
+  @apply bg-card/85 backdrop-blur-xl border border-primary/10 shadow-2xl;
 }
 
-.text-balance {
-  text-wrap: balance;
+/* Scroll-driven header compaction (shrinking-header-on-scroll guide) */
+@media (prefers-reduced-motion: no-preference) {
+  @supports ((animation-timeline: scroll()) and (animation-range: 0% 100%)) {
+    @keyframes navbar-shell-shrink {
+      to {
+        transform: scale(0.985);
+      }
+    }
+
+    @keyframes navbar-surface-elevate {
+      from {
+        background-color: rgb(246 243 238 / 0.72);
+        box-shadow: 0 4px 20px -4px rgb(99 39 64 / 0.06);
+      }
+      to {
+        background-color: rgb(252 250 247 / 0.94);
+        box-shadow: 0 20px 45px -12px rgb(99 39 64 / 0.18);
+      }
+    }
+
+    .scroll-header-shell {
+      animation: navbar-shell-shrink auto linear both;
+      animation-timeline: scroll(block root);
+      animation-range: 0px 120px;
+    }
+
+    .scroll-header-bar {
+      animation: navbar-surface-elevate auto linear both;
+      animation-timeline: scroll(block root);
+      animation-range: 0px 120px;
+    }
+  }
+}
+
+/* Scroll-driven entry effects for cards and gallery items (scroll-entry-exit-effects guide) */
+@media (prefers-reduced-motion: no-preference) {
+  @supports ((animation-timeline: view()) and (animation-range: entry)) {
+    @keyframes card-reveal-up {
+      from {
+        opacity: 0;
+        transform: translateY(28px) scale(0.97);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .scroll-reveal-card {
+      animation: card-reveal-up auto ease-out backwards;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+  }
+}
+
+/* Native Popover top-layer animations & polyfill support (declarative-dialog-popover-control & motion guides) */
+.mobile-nav-popover {
+  display: none;
+  opacity: 0;
+  transform: translateY(-0.75rem) scale(0.97);
+  transition:
+    opacity 0.22s ease-out,
+    transform 0.22s ease-out,
+    display 0.22s ease-out,
+    overlay 0.22s ease-out;
+  transition-behavior: allow-discrete;
+}
+
+.mobile-nav-popover:is(:popover-open, .\:popover-open) {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+@starting-style {
+  .mobile-nav-popover:is(:popover-open, .\:popover-open) {
+    opacity: 0;
+    transform: translateY(-0.75rem) scale(0.97);
+  }
+}
+
+/* Editorial photo frame treatments for enhanced store photography */
+.editorial-photo-card {
+  box-shadow:
+    0 22px 48px -12px rgb(99 39 64 / 0.22),
+    0 4px 12px -2px rgb(0 0 0 / 0.08),
+    inset 0 0 0 1px rgb(255 255 255 / 0.25);
 }

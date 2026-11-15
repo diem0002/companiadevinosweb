@@ -1,12 +1,12 @@
-
 import React from "react";
 
-export const FlagARG = ({ className }: { className?: string }) => (
+export const FlagARG = ({ className, ...props }: React.SVGProps<SVGSVGElement>) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 900 600"
         className={className}
-        aria-label="Argentina Flag"
+        aria-hidden="true"
+        {...props}
     >
         <rect width="900" height="600" fill="#75aadb" />
         <rect width="900" height="200" y="200" fill="#fff" />
@@ -18,12 +18,13 @@ export const FlagARG = ({ className }: { className?: string }) => (
     </svg>
 );
 
-export const FlagBRA = ({ className }: { className?: string }) => (
+export const FlagBRA = ({ className, ...props }: React.SVGProps<SVGSVGElement>) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 1000 700"
         className={className}
-        aria-label="Brazil Flag"
+        aria-hidden="true"
+        {...props}
     >
         <rect width="1000" height="700" fill="#00923e" />
         <path d="M500 60L910 350 500 640 90 350Z" fill="#f8c100" />

@@ -1,8 +1,11 @@
 {
-  "hero": "/lib/hero.jpg",
-  "logo": "/lib/logo.png",
-  "bottles": "/lib/bottles.jpg",
-  "feature1": "/lib/feature1.jpg",
-  "story": "/lib/story.jpg",
-  "mockup": "/lib/app.png"
+    "heroVideoDesktop": "/media/hero/hero-16x9.mp4",
+    "heroVideoMobile": "/media/hero/hero-mobile.mp4",
+    "heroPoster": "/media/hero/hero-poster.jpg",
+    "frenteLocal": "/media/local/frente-local.jpg",
+    "granReserva": "/media/local/cava-gran-reserva.jpg",
+    "coleccionEsmeralda": "/media/local/coleccion-esmeralda.jpg",
+    "estanteria": "/media/local/estanteria-seleccion.jpg",
+    "etiquetasAutor": "/media/local/etiquetas-autor.jpg",
+    "regaleria": "/media/local/regaleria-cristaleria.jpg"
 }

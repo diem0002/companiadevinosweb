@@ -1,11 +1,9 @@
-
 import { Features } from "@/components/sections/Features";
 import { Hero } from "@/components/sections/Hero";
 import { Location } from "@/components/sections/Location";
-import { PriceSection } from "@/components/sections/PriceSection";
 import { ReadyCTA } from "@/components/sections/ReadyCTA";
 import { Story } from "@/components/sections/Story";
-import { Footer } from "@/components/layout/Footer";
+import { Gallery } from "@/components/sections/Gallery";
 
 export default function Home() {
     return (
@@ -13,10 +11,9 @@ export default function Home() {
             <Hero />
             <Features />
             <Story />
-            <PriceSection />
+            <Gallery />
             <ReadyCTA />
             <Location />
-            <Footer />
         </div>
     );
 }

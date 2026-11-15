@@ -7,32 +7,54 @@ interface ObfuscatedContactProps {
     value: string;
     type: "email" | "phone";
     className?: string;
-    text?: string; // Optional custom text to display instead of the value
+    text?: string;
+    message?: string;
+    ariaLabel?: string;
+    children?: React.ReactNode;
 }
 
-export function ObfuscatedContact({ value, type, className, text }: ObfuscatedContactProps) {
+export function ObfuscatedContact({
+    value,
+    type,
+    className,
+    text,
+    message,
+    ariaLabel,
+    children,
+}: ObfuscatedContactProps) {
     const [isClient, setIsClient] = useState(false);
 
     useEffect(() => {
         setIsClient(true);
     }, []);
 
-    const href = type === "email" ? `mailto:${value}` : `https://wa.me/${value.replace(/\D/g, "")}`;
+    const cleanPhone = value.replace(/\D/g, "");
+    const encodedMsg = message ? `?text=${encodeURIComponent(message)}` : "";
+    const href =
+        type === "email"
+            ? `mailto:${value}`
+            : `https://wa.me/${cleanPhone}${encodedMsg}`;
     const displayValue = text || value;
 
     if (!isClient) {
-        // Render a placeholder or partially obscured text for bots/SSR
-        return <span className={className}>Cargando contacto...</span>;
+        return (
+            <span className={cn("inline-flex items-center gap-2", className)}>
+                {children}
+                <span>{displayValue}</span>
+            </span>
+        );
     }
 
     return (
         <a
             href={href}
+            aria-label={ariaLabel}
             className={cn("hover:text-accent transition-colors", className)}
             target="_blank"
             rel="noopener noreferrer"
         >
-            {displayValue}
+            {children}
+            <span>{displayValue}</span>
         </a>
     );
 }
