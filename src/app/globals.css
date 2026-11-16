@@ -252,3 +252,41 @@
     0 4px 12px -2px rgb(0 0 0 / 0.08),
     inset 0 0 0 1px rgb(255 255 255 / 0.25);
 }
+
+
+/* Infinite Winery Logo Marquee (pauses on hover, respects prefers-reduced-motion) */
+@keyframes winery-marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.winery-marquee-track {
+  display: flex;
+  width: max-content;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .winery-marquee-track {
+    animation: winery-marquee-scroll 42s linear infinite;
+  }
+
+  .winery-marquee-shell:hover .winery-marquee-track {
+    animation-play-state: paused;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .winery-marquee-track {
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .winery-marquee-duplicate {
+    display: none;
+  }
+}

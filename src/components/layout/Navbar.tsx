@@ -135,6 +135,12 @@ export function Navbar() {
                         {t("nav.gallery")}
                     </Link>
                     <Link
+                        href="#calculadora"
+                        className="text-xs font-black uppercase tracking-[0.14em] text-foreground/85 hover:text-primary transition-colors"
+                    >
+                        {language === "pt" ? "CALCULADORA" : "CALCULADORA"}
+                    </Link>
+                    <Link
                         href="#location"
                         className="text-xs font-black uppercase tracking-[0.14em] text-foreground/85 hover:text-primary transition-colors"
                     >
@@ -273,6 +279,13 @@ export function Navbar() {
                     onClick={closeMobileMenu}
                 >
                     {t("nav.gallery")}
+                </Link>
+                <Link
+                    href="#calculadora"
+                    className="text-center text-sm font-black uppercase tracking-[0.2em] text-foreground hover:text-primary py-1"
+                    onClick={closeMobileMenu}
+                >
+                    {language === "pt" ? "CALCULADORA" : "CALCULADORA"}
                 </Link>
                 <Link
                     href="#location"
