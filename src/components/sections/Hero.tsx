@@ -10,51 +10,40 @@ export function Hero() {
     const { t } = useLanguage();
     const videoRef = useRef<HTMLVideoElement>(null);
     const [isPaused, setIsPaused] = useState(false);
-    const [isDesktop, setIsDesktop] = useState(true);
-
-    // Dynamically switch video source when resizing or toggling DevTools mobile emulation
-    useEffect(() => {
-        const desktopQuery = window.matchMedia("(min-width: 768px)");
-        setIsDesktop(desktopQuery.matches);
-
-        const handleViewportChange = (event: MediaQueryListEvent) => {
-            setIsDesktop(event.matches);
-        };
-
-        desktopQuery.addEventListener("change", handleViewportChange);
-        return () => desktopQuery.removeEventListener("change", handleViewportChange);
-    }, []);
 
     useEffect(() => {
         const video = videoRef.current;
         if (!video) return;
 
-        video.load();
+        const desktopQuery = window.matchMedia("(min-width: 1024px)");
+        let lastMatch = desktopQuery.matches;
 
-        // Respect prefers-reduced-motion on autoplay video (lazy-load-video-and-audio & motion guides)
-        const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-        const syncReducedMotion = (prefersReduced: boolean) => {
-            if (prefersReduced) {
-                video.pause();
-                setIsPaused(true);
-            } else {
-                video.play().catch(() => {
-                    setIsPaused(true);
-                });
+        const ensurePlaying = () => {
+            if (!video.paused) {
                 setIsPaused(false);
+                return;
+            }
+            video.play().then(() => {
+                setIsPaused(false);
+            }).catch(() => {
+                setIsPaused(true);
+            });
+        };
+
+        ensurePlaying();
+
+        // Only reload video source when crossing the 1024px layout breakpoint
+        const handleViewportChange = (event: MediaQueryListEvent) => {
+            if (event.matches !== lastMatch) {
+                lastMatch = event.matches;
+                video.load();
+                ensurePlaying();
             }
         };
 
-        syncReducedMotion(reducedMotionQuery.matches);
-
-        const handleChange = (event: MediaQueryListEvent) => {
-            syncReducedMotion(event.matches);
-        };
-
-        reducedMotionQuery.addEventListener("change", handleChange);
-        return () => reducedMotionQuery.removeEventListener("change", handleChange);
-    }, [isDesktop]);
+        desktopQuery.addEventListener("change", handleViewportChange);
+        return () => desktopQuery.removeEventListener("change", handleViewportChange);
+    }, []);
 
     const togglePlayback = () => {
         const video = videoRef.current;
@@ -68,35 +57,44 @@ export function Hero() {
         }
     };
 
-    const activeVideoSrc = isDesktop
-        ? `${placeholderImages.heroVideoDesktop}?v=3`
-        : `${placeholderImages.heroVideoMobile}?v=3`;
-
     return (
-        <section className="relative flex min-h-[100svh] items-end md:items-center pt-20 pb-20 md:pb-10 overflow-hidden bg-[#ECE6DC]">
-            {/* Full-frame background video behind the title:
-                - 16:9 widescreen version (1920x1080) on desktop/tablet with the animation right-aligned and positioned below the Navbar
-                - 9:16 mobile version (1080x1920) on mobile screens with the animation centered in the upper half above the card
-                - Explicit integer width & height, no loading="lazy" above the fold (lazy-load-video-and-audio guide) */}
-            <div className="absolute inset-0 z-0 flex items-center justify-center bg-[#ECE6DC]">
+        <section className="relative flex flex-col lg:flex-row lg:min-h-[100svh] lg:items-center pt-20 sm:pt-24 pb-12 lg:py-24 overflow-hidden bg-[#ECE6DC]">
+            {/* Responsive Video Stage:
+                - Mobile & Tablet (< 1024px): Dedicated top block in flex-col so it NEVER overlaps the title card below.
+                  Uses aspect-[1/1] sm:aspect-[10/9] with object-[50%_15%] to frame the upper-half storefront animation of hero-mobile.mp4.
+                - Desktop (>= 1024px): Full-bleed background layer with the storefront positioned on the right side
+                  while the title card sits on the left. */}
+            <div className="relative z-0 w-full max-w-[460px] mx-auto aspect-[1/1] sm:aspect-[10/9] lg:max-w-none lg:aspect-auto lg:absolute lg:inset-0 lg:h-full overflow-hidden bg-[#ECE6DC]">
                 <video
                     ref={videoRef}
-                    src={activeVideoSrc}
-                    width={isDesktop ? 1920 : 1080}
-                    height={isDesktop ? 1080 : 1920}
-                    poster={`${placeholderImages.heroPoster}?v=3`}
-                    preload="metadata"
+                    preload="auto"
                     autoPlay
                     loop
                     muted
                     playsInline
-                    className="h-full w-full object-cover object-center"
+                    className="h-full w-full object-cover object-[50%_15%] lg:object-[70%_center] xl:object-center"
+                >
+                    <source
+                        media="(min-width: 1024px)"
+                        src={placeholderImages.heroVideoDesktop}
+                        type="video/mp4"
+                    />
+                    <source
+                        src={placeholderImages.heroVideoMobile}
+                        type="video/mp4"
+                    />
+                </video>
+
+                {/* Seamless edge blending on mobile/tablet so the video stage merges into #ECE6DC */}
+                <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-[#ECE6DC] to-transparent lg:hidden"
                 />
             </div>
 
-            {/* Foreground Content - Compact on mobile so the upper 52% shows the full storefront animation */}
-            <div className="container mx-auto px-4 md:px-6 relative z-10 fluid-container">
-                <div className="max-w-[440px] md:max-w-[470px] mx-auto md:mx-0 space-y-2.5 md:space-y-4 bg-card/88 backdrop-blur-md p-4 sm:p-5 md:p-7 rounded-[1.75rem] md:rounded-[2rem] border border-primary/15 shadow-2xl">
+            {/* Foreground Content - Stacked below the video on mobile/tablet, left-aligned on desktop */}
+            <div className="container mx-auto px-4 md:px-6 relative z-10 fluid-container -mt-2 sm:mt-0">
+                <div className="max-w-[440px] lg:max-w-[430px] xl:max-w-[470px] mx-auto lg:mx-0 space-y-2.5 md:space-y-4 bg-card/90 backdrop-blur-md p-5 sm:p-6 md:p-7 rounded-[1.75rem] md:rounded-[2rem] border border-primary/15 shadow-2xl">
                     <div className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-[0.6rem] md:text-[0.65rem] font-black tracking-[0.16em] text-primary uppercase">
                         <Sparkles aria-hidden="true" className="h-3 w-3 md:h-3.5 md:w-3.5 text-accent shrink-0" />
                         <span>{t("hero.overline")}</span>
@@ -144,12 +142,12 @@ export function Hero() {
                 </div>
             </div>
 
-            {/* Accessible Pause/Play control moved to bottom-left so bottom-right is dedicated to the Wine Bottle WhatsApp button */}
+            {/* Accessible Pause/Play control */}
             <button
                 type="button"
                 onClick={togglePlayback}
                 aria-label={isPaused ? t("a11y.video.play") : t("a11y.video.pause")}
-                className="absolute bottom-5 left-5 z-20 inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary/85 text-white shadow-lg backdrop-blur-md border border-white/20 hover:bg-primary transition-colors cursor-pointer"
+                className="absolute bottom-4 left-4 md:bottom-5 md:left-5 z-20 inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary/85 text-white shadow-lg backdrop-blur-md border border-white/20 hover:bg-primary transition-colors cursor-pointer"
             >
                 {isPaused ? (
                     <Play aria-hidden="true" className="h-4 w-4 fill-current" />

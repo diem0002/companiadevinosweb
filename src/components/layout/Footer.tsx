@@ -21,7 +21,6 @@ export function Footer() {
                                     alt="Logo de Compañía de Vinos"
                                     width={48}
                                     height={48}
-                                    loading="lazy"
                                     className="h-full w-full object-cover rounded-full"
                                 />
                             </div>

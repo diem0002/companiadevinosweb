@@ -197,26 +197,9 @@
   }
 }
 
-/* Scroll-driven entry effects for cards and gallery items (scroll-entry-exit-effects guide) */
-@media (prefers-reduced-motion: no-preference) {
-  @supports ((animation-timeline: view()) and (animation-range: entry)) {
-    @keyframes card-reveal-up {
-      from {
-        opacity: 0;
-        transform: translateY(28px) scale(0.97);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    .scroll-reveal-card {
-      animation: card-reveal-up auto ease-out backwards;
-      animation-timeline: view();
-      animation-range: entry 0% entry 35%;
-    }
-  }
+/* Cards always remain 100% visible across viewport resizes */
+.scroll-reveal-card {
+  opacity: 1;
 }
 
 /* Native Popover top-layer animations & polyfill support (declarative-dialog-popover-control & motion guides) */
@@ -253,40 +236,24 @@
     inset 0 0 0 1px rgb(255 255 255 / 0.25);
 }
 
-
-/* Infinite Winery Logo Marquee (pauses on hover, respects prefers-reduced-motion) */
+/* Infinite Winery Logo Marquee (always active on all PCs and browsers, pauses on hover) */
 @keyframes winery-marquee-scroll {
   0% {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
 .winery-marquee-track {
-  display: flex;
-  width: max-content;
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  width: max-content !important;
+  will-change: transform;
+  animation: winery-marquee-scroll 38s linear infinite !important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .winery-marquee-track {
-    animation: winery-marquee-scroll 42s linear infinite;
-  }
-
-  .winery-marquee-shell:hover .winery-marquee-track {
-    animation-play-state: paused;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .winery-marquee-track {
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: center;
-  }
-
-  .winery-marquee-duplicate {
-    display: none;
-  }
+.winery-marquee-shell:hover .winery-marquee-track {
+  animation-play-state: paused !important;
 }

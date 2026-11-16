@@ -31,8 +31,7 @@ export function Location() {
                                 src={placeholderImages.frenteLocal}
                                 alt="Frente del local de Compañía de Vinos en San Luis 1220, Concordia"
                                 fill
-                                sizes="(min-width: 1024px) 48vw, 100vw"
-                                loading="lazy"
+                                unoptimized
                                 className="object-cover transition-transform duration-700 group-hover:scale-105"
                             />
                             <div
@@ -86,7 +85,7 @@ export function Location() {
                                 href="https://www.google.com/maps/search/?api=1&query=San+Luis+1220,+Concordia,+Entre+Ríos"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex h-13 items-center justify-center gap-2 rounded-full bg-primary px-7 text-xs uppercase tracking-wider font-black text-white shadow-lg shadow-primary/20 hover:bg-primary/90 transition-colors"
+                                className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-7 text-xs uppercase tracking-wider font-black text-white shadow-lg shadow-primary/20 hover:bg-primary/90 transition-colors"
                             >
                                 <span>{t("location.cta.maps")}</span>
                                 <ExternalLink aria-hidden="true" className="h-4 w-4 text-accent" />
@@ -97,7 +96,7 @@ export function Location() {
                                 type="phone"
                                 text={t("location.cta.whatsapp")}
                                 message={t("ready.whatsapp.message")}
-                                className="inline-flex h-13 items-center justify-center gap-2 rounded-full bg-card border border-primary/20 px-7 text-xs uppercase tracking-wider font-black text-primary hover:bg-primary hover:text-white transition-colors"
+                                className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-card border border-primary/20 px-7 text-xs uppercase tracking-wider font-black text-primary hover:bg-primary hover:text-white transition-colors"
                             >
                                 <MessageCircle aria-hidden="true" className="h-4 w-4 text-accent" />
                             </ObfuscatedContact>
@@ -105,15 +104,15 @@ export function Location() {
                     </div>
 
                     {/* Right Column: Interactive Map */}
-                    <div className="lg:col-span-6 min-h-[420px] lg:min-h-full bg-card p-3.5 rounded-[2.5rem] shadow-xl border border-primary/10">
-                        <div className="h-full w-full min-h-[390px] rounded-[2rem] overflow-hidden">
+                    <div className="lg:col-span-6 h-[420px] lg:h-auto lg:min-h-full bg-card p-3.5 rounded-[2.5rem] shadow-xl border border-primary/10 flex flex-col">
+                        <div className="relative flex-1 w-full min-h-[390px] rounded-[2rem] overflow-hidden">
                             <iframe
                                 title="Mapa de ubicación de Compañía de Vinos en San Luis 1220, Concordia"
                                 width="100%"
                                 height="100%"
                                 style={{ border: 0, minHeight: "390px" }}
-                                loading="lazy"
                                 allowFullScreen
+                                className="absolute inset-0 h-full w-full"
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3399.049666065584!2d-58.02058692347366!3d-31.393437296068694!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95ade81bc134064d%3A0x60032e57865c36f0!2sSan%20Luis%201220%2C%20E3200%20Concordia%2C%20Entre%20R%C3%ADos!5e0!3m2!1ses!2sar!4v1709664483756!5m2!1ses!2sar"
                             />
                         </div>

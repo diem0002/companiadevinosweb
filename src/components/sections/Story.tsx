@@ -53,8 +53,7 @@ export function Story() {
                                 src={placeholderImages.granReserva}
                                 alt="Gran Reserva Malbec en las estanterías de Compañía de Vinos"
                                 fill
-                                sizes="(min-width: 1024px) 22vw, 48vw"
-                                loading="lazy"
+                                unoptimized
                                 className="object-cover"
                             />
                             <div
@@ -68,8 +67,7 @@ export function Story() {
                                 src={placeholderImages.regaleria}
                                 alt="Set de regalería con vino Malbec, copas de cristal y aireador"
                                 fill
-                                sizes="(min-width: 1024px) 22vw, 48vw"
-                                loading="lazy"
+                                unoptimized
                                 className="object-cover"
                             />
                             <div

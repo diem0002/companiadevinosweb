@@ -22,7 +22,7 @@ const WINERY_LOGOS: WineryLogo[] = [
     {
         name: "Luigi Bosca",
         src: "/images/bodegas/luigi-bosca.png",
-        heightClass: "h-11 md:h-13",
+        heightClass: "h-11 md:h-12",
     },
     {
         name: "Bodegas Salentein",
@@ -42,7 +42,7 @@ const WINERY_LOGOS: WineryLogo[] = [
     {
         name: "Nieto Senetiner",
         src: "/images/bodegas/nieto-senetiner.png",
-        heightClass: "h-11 md:h-13",
+        heightClass: "h-11 md:h-12",
     },
     {
         name: "Zuccardi Valle de Uco",
@@ -99,29 +99,32 @@ export function WineryMarquee() {
             </div>
 
             {/* Edge fade masks */}
-            <div className="relative w-full overflow-hidden">
+            <div className="winery-marquee-shell relative w-full overflow-hidden">
                 <div className="pointer-events-none absolute inset-y-0 left-0 w-16 md:w-36 bg-gradient-to-r from-[#F5F2EB] to-transparent z-10" />
                 <div className="pointer-events-none absolute inset-y-0 right-0 w-16 md:w-36 bg-gradient-to-l from-[#F5F2EB] to-transparent z-10" />
 
-                <div className="winery-marquee-track flex items-center w-max">
+                <div className="winery-marquee-track flex flex-nowrap items-center w-max">
                     {marqueeItems.map((winery, idx) => (
                         <div
                             key={`${winery.name}-${idx}`}
-                            className="group flex items-center"
+                            aria-hidden={idx >= WINERY_LOGOS.length ? "true" : undefined}
+                            className="group flex items-center shrink-0"
                         >
-                            <div className="px-8 md:px-12 py-2 flex items-center justify-center transition-all duration-300 opacity-80 hover:opacity-100 hover:scale-105">
+                            <div className="px-8 md:px-12 py-2 flex items-center justify-center transition-all duration-300 opacity-80 hover:opacity-100 hover:scale-105 shrink-0">
                                 <img
                                     src={winery.src}
-                                    alt={`Logo oficial ${winery.name}`}
-                                    loading="lazy"
-                                    className={`${winery.heightClass} w-auto object-contain pointer-events-none`}
+                                    alt={idx >= WINERY_LOGOS.length ? "" : `Logo oficial ${winery.name}`}
+                                    loading="eager"
+                                    decoding="async"
+                                    draggable={false}
+                                    className={`${winery.heightClass} w-auto max-w-none object-contain pointer-events-none select-none`}
                                 />
                             </div>
 
                             {/* Diamond separator */}
                             <span
                                 aria-hidden="true"
-                                className="text-[#C5A059]/45 text-[9px]"
+                                className="text-[#C5A059]/45 text-[9px] shrink-0"
                             >
                                 ◆
                             </span>

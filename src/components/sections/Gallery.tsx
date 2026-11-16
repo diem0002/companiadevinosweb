@@ -62,8 +62,7 @@ export function Gallery() {
                         src={placeholderImages.estanteria}
                         alt={t("gallery.item5.title")}
                         fill
-                        sizes="(min-width: 1280px) 1200px, 100vw"
-                        loading="lazy"
+                        unoptimized
                         className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                     <div
@@ -106,8 +105,7 @@ export function Gallery() {
                                 src={item.src}
                                 alt={item.title}
                                 fill
-                                sizes="(min-width: 1024px) 24vw, (min-width: 640px) 48vw, 95vw"
-                                loading="lazy"
+                                unoptimized
                                 className="object-cover transition-transform duration-700 group-hover:scale-105"
                             />
                             {/* Studio Lighting & Vignette Overlay */}
